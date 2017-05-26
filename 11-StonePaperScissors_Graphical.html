@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StonePaperScissor</title>
+    <script type="text/javascript">
+        function SPS(player)
+        {
+            switch(player)
+            {
+                case 1:player="Stone";
+                    break;
+                case 2:player="Scissor";
+                    break;
+                default:player="Paper";
+                    break;
+            }
+            var computer=Math.random();
+            if (computer<0.33)
+                computer="Stone";
+            else if(computer<0.66)
+                computer="Paper";
+            else
+                computer="Scissor";
+            computer=computer.toLowerCase();
+            player=player.toLowerCase();
+            player=player.substr(0,1).toUpperCase()+player.substr(1);
+            computer=computer.substr(0,1).toUpperCase()+computer.substr(1);
+            var winner = SPS_Rules(player,computer);   
+            winner=winner.substr(0,1).toUpperCase()+winner.substr(1);
+            document.getElementById("player").src=player+".jpg";
+            document.getElementById("computer").src=computer+".jpg";
+            document.getElementById("player").style.border="none";
+            document.getElementById("computer").style.border="none";
+            if (winner=="Computer")
+                document.getElementById("computer").style.border="4px solid green";
+            if (winner=="Player")
+                document.getElementById("player").style.border="4px solid green";
+        }
+        function SPS_Rules(player1,player2)
+        {              
+            var winner="computer";
+            if (player1==player2)
+                winner="draw";
+            else
+            {
+                switch (player1)
+                {
+                    case "Stone":
+                        if (player2=="Paper") 
+                            winner="computer";
+                        else
+                            winner="player";
+                        break;
+                    case "Scissor":
+                        if (player2=="Paper") 
+                            winner="player";
+                        else
+                            winner="computer";
+                        break;
+                    case "Paper":
+                        if (player2=="Scissor") 
+                            winner="computer";
+                        else
+                            winner="player";
+                        break;
+                }
+            }
+            return winner;
+        }
+    </script>
+    <style type="text/css">
+        div.main
+        {
+            height: 100vh;
+            text-align: center;
+            width:49%;
+            display: inline-block;
+        }
+        div.result
+        {
+            height: 100vh;
+            text-align: center;
+            width:49%;
+            display: inline-block;
+        }
+        img.result1
+        {
+            width :200px;
+            height: 170px;
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+        }
+        img.result2
+        {
+            width :200px;
+            height: 170px;
+            position: absolute;
+            left: 230px;
+            bottom: 10px;
+        }
+        img.game
+        {
+            width :600px;
+            height: 600px;
+        }
+        div.subresult
+        {
+            height: 33%;
+        }
+        div.subresultmain
+        {
+            position: relative;
+            height: 34%;
+        }
+    </style>
+</head>
+<body>
+    <map name="map1">
+        <area shape="rect" coords="0,0,300,200" onclick="SPS(1)" href="#">
+        <area shape="rect" coords="0,200,300,400" onclick="SPS(2)" href="#">
+        <area shape="rect" coords="0,400,300,600" onclick="SPS(3)" href="#">
+    </map>
+    <div class="main">
+        <img src="PaperStoneScissor.jpg" usemap="#map1" class="game">
+    </div>
+    <div class="result">
+        <div class="subresult"></div>
+        <div class="subresultmain">
+            <img id="player" class="result1">
+            <img id="computer" class="result2">
+        </div>
+        <div class="subresult"></div>
+    </div>
+</body>
+</html>

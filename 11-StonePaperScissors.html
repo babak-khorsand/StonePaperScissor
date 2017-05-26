@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StonePaperScissors</title>
+    <script type="text/javascript">
+        function SPS()
+        {
+            var player=prompt("Enter your chioce","Stone,Paper,Scissors");
+            var computer=Math.random();
+            if (computer<0.33)
+                computer="Stone";
+            else if(computer<0.66)
+                computer="Paper";
+            else
+                computer="Scissors";
+            computer=computer.toLowerCase();
+            player=player.toLowerCase();
+            player=player.substr(0,1).toUpperCase()+player.substr(1);
+            computer=computer.substr(0,1).toUpperCase()+computer.substr(1);
+            var winner = SPS_Rules(player,computer);   
+            winner=winner.substr(0,1).toUpperCase()+winner.substr(1);
+            alert("Player choice was "+player+"\nComputer choice was "+computer+"\nWinner:"+winner);
+        }
+        function SPS_Rules(player1,player2)
+        {              
+            var winner="computer";
+            if (player1==player2)
+                winner="draw";
+            else
+            {
+                switch (player1)
+                {
+                    case "stone":
+                        if (player2=="paper") 
+                            winner="computer";
+                        else
+                            winner="player";
+                        break;
+                    case "scissors":
+                        if (player2=="paper") 
+                            winner="player";
+                        else
+                            winner="computer";
+                        break;
+                    case "paper":
+                        if (player2=="scissors") 
+                            winner="computer";
+                        else
+                            winner="player";
+                        break;
+                }
+            }
+            return winner;
+        }
+    </script>
+    <style type="text/css">
+        
+        
+    </style>
+</head>
+<body>
+    <button onclick="SPS()">SPS</button>
+</body>
+</html>
